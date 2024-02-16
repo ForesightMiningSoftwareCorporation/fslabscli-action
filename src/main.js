@@ -27,7 +27,7 @@ export async function fslabscliDownload() {
   const downloadPath = await tool.downloadTool(
     fslabscliPackage.url,
     undefined,
-    `token ${core.getInput('token')}`
+    `Bearer ${core.getInput('token')}`
   )
 
   core.debug('Adding to the cache ...')

@@ -1,0 +1,19 @@
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+name: 'FSLABScli Installer'
+description: 'Install a specific FSLABScli version'
+author: 'ForesightMiningSoftwareCorporation'
+branding:
+  icon: 'fast-forward'
+  color: 'purple'
+inputs:
+  version:
+    description: 'Specify FSLABScli version to use. Accepted values are any FSLABScli version'
+    required: false
+    default: v0.1.1
+  token:
+    description: Github Token to fetch private binaries
+    required: true
+    default: ${{ github.token }}
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

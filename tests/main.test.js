@@ -66,7 +66,7 @@ describe('main', () => {
     restorePlatformArch()
   })
 
-  it('updatecli not found', async () => {
+  it('fslabscli not found', async () => {
     const path = process.env['PATH']
     process.env['PATH'] = ''
     await expect(fslabscliVersion()).rejects.toThrowErrorMatchingInlineSnapshot(

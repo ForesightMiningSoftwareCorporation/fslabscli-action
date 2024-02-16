@@ -27,7 +27,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  updatecli:
+  fslabscli:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

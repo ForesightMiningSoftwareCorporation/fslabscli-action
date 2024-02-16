@@ -17,10 +17,10 @@ scms:
     default:
         kind: github
         spec:
-            branch: v1
+            branch: main
             email: devops@fslabs.ca
             owner: ForesightMiningSoftwareCorporation
-            repository: fslabscli-action
+            repository: fslabsci-action
             token: '{{requiredEnv "UPDATECLI_GITHUB_TOKEN"}}'
             user: ForesightMiningSoftwareCorporation
             username: github-actions

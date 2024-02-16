@@ -38,7 +38,6 @@ jobs:
 
       - uses: tibdex/github-app-token@v2.1.0
         id: generate_token
-        if: steps.commit.outputs.diff
         with:
           app_id: ${{ secrets.FMSC_BOT_GITHUB_APP_ID }}
           private_key: ${{ secrets.FMSC_BOT_GITHUB_APP_PRIVATE_KEY }}

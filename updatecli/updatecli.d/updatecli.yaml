@@ -33,7 +33,7 @@ sources:
             repository: fslabscli
             token: '{{requiredEnv "UPDATECLI_GITHUB_TOKEN"}}'
         transformers:
-            - trimprefix: fslabsci-
+            - trimprefix: "fslabscli-"
 targets:
     action:
         name: Bump fslabscli version in action.yaml

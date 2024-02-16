@@ -16,7 +16,7 @@ scms:
     default:
         kind: github
         spec:
-            branch: main
+            branch: v1
             email: devops@fslabs.ca
             owner: ForesightMiningSoftwareCorporation
             repository: fslabsci-action

@@ -1,6 +1,7 @@
 import core from '@actions/core'
 import tool from '@actions/tool-cache'
 import exec from '@actions/exec'
+import github from '@actions/github'
 import path from 'node:path'
 
 export async function fslabscliDownload() {
@@ -10,7 +11,7 @@ export async function fslabscliDownload() {
     {
       arch: 'x64',
       platform: 'linux',
-      url: `https://github.com/ForesightMiningSoftwareCorporation/fslabscli/releases/download/fslabscli-${version}/fslabscli-x86_64-unknown-linux-gnu-1.75-v${version}`,
+      name: `fslabscli-x86_64-unknown-linux-gnu-1.75-v${version}`,
     },
   ]
 
@@ -23,23 +24,38 @@ export async function fslabscliDownload() {
     )
   }
 
-  core.info(`Downloading ${fslabscliPackage.url}`)
+  core.info(`Downloading ${fslabscliPackage.name}`)
+  const token = core.getInput('token')
+  const octokit = github.getOctokit(token)
+  const {
+    data: {assets},
+  } = await octokit.rest.repos.getReleaseByTag({
+    owner: 'ForesightMiningSoftwareCorporation',
+    repo: 'fslabscli',
+    tag: `fslabscli-${version}`,
+  })
+  const asset = assets.find(asset => asset.name.includes(fslabscliPackage.name))
   const downloadPath = await tool.downloadTool(
-    fslabscliPackage.url,
-    undefined,
-    `token ${core.getInput('token')}`
+    asset.url,
+    'fslabscli',
+    `Bearer ${core.getInput('token')}`,
+    {
+      accept: 'application/octet-stream',
+      'user-agent': 'FSLABScli action',
+    }
   )
 
   core.debug('Adding to the cache ...')
-  const cachedPath = await tool.cacheDir(
+  const cachedPath = await tool.cacheFile(
     downloadPath,
     'fslabscli',
+    'fslabscki',
     version,
     process.arch
   )
 
   if (process.platform == 'linux' || process.platform == 'darwin') {
-    await exec.exec('chmod', ['+x', path.join(cachedPath, 'fslabcli')])
+    await exec.exec('chmod', ['+x', path.join(cachedPath, 'fslabscli')])
   }
 
   core.addPath(cachedPath)

@@ -37,7 +37,7 @@ jobs:
           UPDATECLI_GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
       - name: "Run updatecli"
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/v1'
         run: "updatecli apply --config ./updatecli/updatecli.d --experimental --clean=true"
         env:
           UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}

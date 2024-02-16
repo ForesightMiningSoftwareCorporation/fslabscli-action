@@ -42,7 +42,7 @@ jobs:
           app_id: ${{ secrets.FMSC_BOT_GITHUB_APP_ID }}
           private_key: ${{ secrets.FMSC_BOT_GITHUB_APP_PRIVATE_KEY }}
 
-      - name: Install Updatecli
+      - name: Install FSLABScli
         uses: ./
         with:
           token: ${{ steps.generate_token.outputs.token }}

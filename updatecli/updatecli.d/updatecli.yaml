@@ -1,6 +1,5 @@
-name: action.yaml
 pipelineid: version
-title: Bump fslabscli version
+name: Bump fslabscli version
 actions:
     default:
         title: Bump fslabscli version to {{ source "fslabscli" }}

@@ -9,10 +9,10 @@ inputs:
   version:
     description: 'Specify FSLABScli version to use. Accepted values are any FSLABScli version'
     required: false
-    default: 0.1.5
+    default: 0.1.6
   token:
     description: Github Token to fetch private binaries
-    required: true
+    required: false
     default: ${{ github.token }}
 runs:
   using: 'node20'

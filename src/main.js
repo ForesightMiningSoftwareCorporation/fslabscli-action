@@ -49,7 +49,7 @@ export async function fslabscliDownload() {
   const cachedPath = await tool.cacheFile(
     downloadPath,
     'fslabscli',
-    'fslabscki',
+    'fslabscli',
     version,
     process.arch
   )

@@ -9,7 +9,7 @@ inputs:
   version:
     description: 'Specify FSLABScli version to use. Accepted values are any FSLABScli version'
     required: false
-    default: 0.3.5
+    default: 0.3.6
   token:
     description: Github Token to fetch private binaries
     required: false

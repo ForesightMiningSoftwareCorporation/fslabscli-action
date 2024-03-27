@@ -32,7 +32,7 @@ export async function fslabscliDownload() {
   } = await octokit.rest.repos.getReleaseByTag({
     owner: 'ForesightMiningSoftwareCorporation',
     repo: 'fslabscli',
-    tag: `fslabscli-${version}`,
+    tag: `cargo-fslabscli-${version}`,
   })
   const asset = assets.find(asset => asset.name.includes(fslabscliPackage.name))
   const downloadPath = await tool.downloadTool(

@@ -7,7 +7,7 @@ branding:
   color: 'purple'
 inputs:
   version:
-    default: 1.1.13
+    default: 1.1.14
     description: 'Specify FSLABScli version to use. Accepted values are any FSLABScli version'
     required: false
   token:

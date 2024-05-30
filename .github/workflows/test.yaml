@@ -11,22 +11,22 @@ jobs:
     name: Test Javascript
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set Node.js 16.x
-      uses: actions/setup-node@v4.0.2
-      with:
-        node-version: 16.x
-        cache: npm
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 16.x
+          cache: npm
 
-    - name: Install Dependencies
-      run: npm ci
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Run Lint Test
-      run: npm run lint
+      - name: Run Lint Test
+        run: npm run lint
 
-#    - name: Run tests
-#      run: npm test
+  #    - name: Run tests
+  #      run: npm test
 
   e2e:
     name: Test fslabscli Github Action
@@ -35,17 +35,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v4
 
-
-      - uses: tibdex/github-app-token@v2.1.0
-        id: generate_token
-        with:
-          app_id: ${{ secrets.FMSC_BOT_GITHUB_APP_ID }}
-          private_key: ${{ secrets.FMSC_BOT_GITHUB_APP_PRIVATE_KEY }}
-
       - name: Install Updatecli
         uses: ./
         with:
-          token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test local action without install-only
-        run:  fslabscli generate-release-workflow --output .github/workflows/release.yml
+        run: fslabscli generate-release-workflow --output .github/workflows/release.yml

@@ -8,7 +8,7 @@ on:
       - v1
   schedule:
     # Run once a day
-    - cron: '*/10 * * * *'
+    - cron: '0 0 * * *'
 
 permissions:
   contents: write
@@ -21,25 +21,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: tibdex/github-app-token@v2.1.0
-        id: generate_token
-        with:
-          app_id: ${{ secrets.FMSC_BOT_GITHUB_APP_ID }}
-          private_key: ${{ secrets.FMSC_BOT_GITHUB_APP_PRIVATE_KEY }}
+      - name: 'Setup updatecli'
+        uses: 'updatecli/updatecli-action@v2'
 
-      - name: "Setup updatecli"
-        uses: "updatecli/updatecli-action@v2"
-
-      - name: "Run updatecli in dryrun"
-        run: "updatecli diff --config ./updatecli/updatecli.d --experimental --clean=true"
+      - name: 'Run updatecli in dryrun'
+        run: 'updatecli diff --config ./updatecli/updatecli.d --experimental --clean=true'
         env:
           UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}
-          UPDATECLI_GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: "Run updatecli"
+      - name: 'Run updatecli'
         if: github.ref == 'refs/heads/v1'
-        run: "updatecli apply --config ./updatecli/updatecli.d --experimental --clean=true"
+        run: 'updatecli apply --config ./updatecli/updatecli.d --experimental --clean=true'
         env:
           UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}
-          UPDATECLI_GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-
+          UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
